@@ -14,6 +14,7 @@ RUN apk --update add curl && \
 
 # Install marvel app to kibana
 RUN /opt/kibana-${KIBANA_VERSION}/bin/kibana plugin --install elasticsearch/marvel/latest
+RUN /opt/kibana-${KIBANA_VERSION}/bin/kibana plugin --install elastic/sense
 
 ADD ./run_kibana.sh /run_kibana.sh
 
