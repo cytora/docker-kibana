@@ -12,8 +12,12 @@ RUN apk --update add curl && \
     apk del curl && \
     rm -rf /var/cache/apk/*
 
-ADD ./run.sh /run.sh
+# Install marvel app to kibana
+RUN /opt/kibana-${KIBANA_VERSION}/bin/kibana plugin --install elasticsearch/marvel/latest
+RUN /opt/kibana-${KIBANA_VERSION}/bin/kibana plugin --install elastic/sense
+
+ADD ./run_kibana.sh /run_kibana.sh
 
 EXPOSE 5601
 
-ENTRYPOINT /run.sh
+ENTRYPOINT /run_kibana.sh
